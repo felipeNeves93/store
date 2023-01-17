@@ -1,0 +1,64 @@
+{
+  "namespace": "com.order.avro.orders",
+  "type": "record",
+  "name": "OrderValue",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "creationDate",
+      "type": "string"
+    },
+    {
+      "name": "price",
+      "type": "double"
+    },
+    {
+      "name": "customer",
+      "type": {
+        "name": "customer",
+        "type": "record",
+        "fields": [
+          {
+            "name": "id",
+            "type": "int"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "products",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "product",
+          "type": "record",
+          "fields": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "price",
+              "type": "double"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -10,3 +10,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+kafka:
+  topics:
+    order-created: order-created
+  config:
+    bootstrap-servers: http://localhost:9092
+    schema-registry-url: http://localhost:8081
+    group-id: foo
