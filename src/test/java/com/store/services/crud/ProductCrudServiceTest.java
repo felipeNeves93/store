@@ -1,4 +1,4 @@
-package com.store.services;
+package com.store.services.crud;
 
 import com.store.entity.Product;
 import com.store.services.crud.ProductCrudService;

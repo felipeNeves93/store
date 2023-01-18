@@ -1,4 +1,4 @@
-package com.store.services.base;
+package com.store.services.crud;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

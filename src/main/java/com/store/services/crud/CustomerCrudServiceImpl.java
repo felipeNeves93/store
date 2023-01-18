@@ -1,8 +1,7 @@
-package com.store.services;
+package com.store.services.crud;
 
 import com.store.entity.Customer;
 import com.store.repositories.CustomerRepository;
-import com.store.services.base.BaseCrudServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service

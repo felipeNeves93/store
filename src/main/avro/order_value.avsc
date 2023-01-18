@@ -1,5 +1,5 @@
 {
-  "namespace": "com.order.avro.orders",
+  "namespace": "com.store.avro.orders",
   "type": "record",
   "name": "OrderValue",
   "fields": [

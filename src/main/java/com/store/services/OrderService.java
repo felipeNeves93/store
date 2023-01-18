@@ -1,11 +1,12 @@
 package com.store.services;
 
+import com.store.dto.OrderProductDTO;
 import com.store.entity.Customer;
 import com.store.entity.Product;
 
 import java.util.List;
 
-public interface StoreService {
+public interface OrderService {
 
-    void createOrder(List<Product> products, Customer customer);
+    void create(List<OrderProductDTO> products, Customer customer);
 }

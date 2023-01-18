@@ -3,6 +3,7 @@ package com.store.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "products")
@@ -28,4 +29,7 @@ public class Product {
 
     @Column
     private double price;
+
+    @Column
+    private LocalDate creationDate;
 }
