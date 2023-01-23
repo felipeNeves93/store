@@ -9,5 +9,5 @@ import lombok.*;
 @Builder
 public class OrderProductDTO {
     private int amount;
-    private ProductDTO product;
+    private Long productId;
 }

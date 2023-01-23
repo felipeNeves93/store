@@ -37,5 +37,4 @@ public class ProductController {
                 .map(p -> modelMapper.map(p, ProductDTO.class))
                 .toList());
     }
-
 }

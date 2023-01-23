@@ -5,6 +5,7 @@ import com.store.avro.orders.OrderValue;
 import com.store.avro.orders.ProductValue;
 import com.store.dto.CustomerDTO;
 import com.store.dto.OrderProductDTO;
+import com.store.services.crud.ProductCrudService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -19,36 +20,35 @@ public class OrderValueFactory {
 
     private final ModelMapper modelMapper;
 
+    private final ProductCrudService productCrudService;
+
     public OrderValue create(List<OrderProductDTO> produts, CustomerDTO customer) {
         var orderValue = new OrderValue();
-        var orderPrice = this.calculateOrderPrice(produts);
 
         var convertedCustomer = modelMapper.map(customer, CustomerValue.class);
         var convertedProducts = this.convertOrderProductsToProducts(produts);
 
         orderValue.setProducts(convertedProducts);
         orderValue.setCustomer(convertedCustomer);
-        orderValue.setPrice(orderPrice);
+        orderValue.setPrice(this.calculateOrderPrice(orderValue.getProducts()));
         orderValue.setCreationDate(LocalDate.now().toString());
 
         return orderValue;
     }
 
-    private Double calculateOrderPrice(List<OrderProductDTO> products) {
-        return products.stream()
-                .mapToDouble(p -> p.getProduct().getPrice() * p.getAmount())
-                .sum();
-
+    private Double calculateOrderPrice(List<ProductValue> products) {
+        return products.stream().mapToDouble(p -> p.getPrice() * p.getAmount()).sum();
     }
 
-    private List<ProductValue> convertOrderProductsToProducts(List<OrderProductDTO> products) {
+    private List<ProductValue> convertOrderProductsToProducts(List<OrderProductDTO> orderProducts) {
         final var productValues = new ArrayList<ProductValue>();
 
-        products.forEach(orderProduct -> {
-            var productValue = modelMapper.map(orderProduct.getProduct(), ProductValue.class);
-            productValue.setAmount(orderProduct.getAmount());
+        orderProducts.forEach(orderProduct -> {
+            var product = productCrudService.findById(orderProduct.getProductId()).orElseThrow(() -> new IllegalStateException("Product wasn't found with id " + orderProduct.getProductId()));
+            var convertedProduct = modelMapper.map(product, ProductValue.class);
 
-            productValues.add(productValue);
+            convertedProduct.setAmount(orderProduct.getAmount());
+            productValues.add(convertedProduct);
         });
 
         return productValues;
