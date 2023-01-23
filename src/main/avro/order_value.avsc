@@ -18,7 +18,7 @@
     {
       "name": "customer",
       "type": {
-        "name": "customer",
+        "name": "CustomerValue",
         "type": "record",
         "fields": [
           {
@@ -37,7 +37,7 @@
       "type": {
         "type": "array",
         "items": {
-          "name": "product",
+          "name": "ProductValue",
           "type": "record",
           "fields": [
             {

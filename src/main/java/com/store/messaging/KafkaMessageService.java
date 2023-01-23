@@ -19,6 +19,7 @@ public class KafkaMessageService implements MessageService<SpecificRecord> {
     public void send(String destination, SpecificRecord payload) {
         var result = kafkaTemplate.send(destination, payload);
 
+        log.info("Sending message to topic: {} with payload: {}", destination, payload);
         result.addCallback(new ListenableFutureCallback<SendResult<String, SpecificRecord>>() {
 
             @Override
