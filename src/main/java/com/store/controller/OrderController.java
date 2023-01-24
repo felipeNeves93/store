@@ -25,7 +25,7 @@ public class OrderController {
         var customer = customerCrudService.findById(customerId).orElseThrow(() -> new IllegalStateException("Customer wasn't found with id :" + customerId + " !"));
         var convertedCustomer = modelMapper.map(customer, CustomerDTO.class);
 
-
+        orderService.create(products, convertedCustomer);
 
     }
 }
