@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ public class CustomerController {
         Objects.requireNonNull(customerDTO, "A customer is required to be saved!");
 
         var convertedCustomer = modelMapper.map(customerDTO, Customer.class);
+        convertedCustomer.setCreatedDate(LocalDateTime.now());
         var savedCustomer = customerCrudService.save(convertedCustomer);
 
         return ResponseEntity.ok(modelMapper.map(savedCustomer, CustomerDTO.class));

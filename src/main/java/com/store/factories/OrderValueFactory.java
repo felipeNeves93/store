@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class OrderValueFactory {
 
     public OrderValue create(List<OrderProductDTO> produts, CustomerDTO customer) {
         var orderValue = new OrderValue();
+        orderValue.setId(UUID.randomUUID().toString());
 
         var convertedCustomer = modelMapper.map(customer, CustomerValue.class);
         var convertedProducts = this.convertOrderProductsToProducts(produts);

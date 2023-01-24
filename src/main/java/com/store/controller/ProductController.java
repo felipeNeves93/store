@@ -8,11 +8,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/poducts")
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -24,6 +25,7 @@ public class ProductController {
         Objects.requireNonNull(productDTO, "A product is required to be saved!");
 
         var convertedProduct = modelMapper.map(productDTO, Product.class);
+        convertedProduct.setCreationDate(LocalDate.now());
         var savedProduct = productCrudService.save(convertedProduct);
 
         return ResponseEntity.ok(modelMapper.map(savedProduct, ProductDTO.class));

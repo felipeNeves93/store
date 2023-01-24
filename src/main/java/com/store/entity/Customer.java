@@ -34,7 +34,6 @@ public class Customer {
     @Column
     private boolean active;
 
-    @CreatedDate
     private LocalDateTime createdDate;
 
 }
