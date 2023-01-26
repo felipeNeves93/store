@@ -32,4 +32,8 @@ public class Product {
 
     @Column
     private LocalDate creationDate;
+
+    @Lob
+    @Column
+    private byte[] image;
 }

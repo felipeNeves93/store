@@ -3,6 +3,7 @@ package com.store.services.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ public class BaseCrudServiceImpl<T, ID, R extends JpaRepository<T, ID>>
     private final R repository;
 
     @Override
+    @Transactional
     public T save(T entity) {
         return repository.save(entity);
     }
@@ -23,6 +25,7 @@ public class BaseCrudServiceImpl<T, ID, R extends JpaRepository<T, ID>>
     }
 
     @Override
+    @Transactional
     public void deleteById(ID id) {
         repository.deleteById(id);
     }
